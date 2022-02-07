@@ -1,49 +1,44 @@
 #include <iostream>
 #include <stdlib.h>
 #include <windows.h>
-using namespace std;
-
+using std::cout;
+using std::cin;
 int main() {
 
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);	// Creates handle to used SetConsoleTextAttribute
 	SetConsoleTextAttribute(h, 15); // Sets console text to bright white
-	int input;	// Initialized int
+	srand(time(NULL));
+	int iNumber = (rand() % 2) + 1;	// Randomizes iNumber between 1 and 2
+	char choice; // Initialize choice
 
-	cout << "Conflip application." << endl;
+	do {	// Creates a loop
+		cout
+		<< "Coinflip application.\n"
+		<< "What would you like to do?\n"
+		<< "(q)uit or (f)lip a coin:\t"
+		<< std::flush;
 
-	while (true) {	// Creates a while loop
-		cout << "1.\tFlip Coin." << endl;
-		cout << "2.\tExit" << endl;
-		cout << "Choose Option > " << flush;
-		cin >> input;
-		int iNumber = rand() % 2 + 1;	// Randomizes iNumber between 1 and 2
-		cout << endl;
-		switch (input) {	//creates a menu to navigate with
-		case 1:
-			cout << "Flipping Coin." << endl << endl;
-			if (iNumber == 1) {	// Checks if iNumber is equal to 1
-				SetConsoleTextAttribute(h, 3);
-				cout << "-= Coin lands on HEADS! =-" << endl << endl;
-				SetConsoleTextAttribute(h, 15);
-				cout << "Returning to selection" << endl << endl;
-				break;	// breaks
-				main(); // returns to main
+		cin >> choice;
+		if (choice == 'f') {
+			srand(time(NULL));
+			int iNumber = (rand() % 2) + 1;	// Randomizes iNumber between 1 and 2
+			if (iNumber == 1) {
+			SetConsoleTextAttribute(h, 3);	// Changes console color to cyan
+			cout << std::endl << "-= Coin lands on HEADS! =-\n" << std::endl;
+			SetConsoleTextAttribute(h, 15); // Changes console color to bright white
+			cout << "Returning to selection\n" << std::endl;
 			}
-			else {	// if iNumber is anything besides 1
+			else {
 				SetConsoleTextAttribute(h, 3);	//sets console color to blue
-				cout << "-= Coin Lands on TAILS! =-" << endl << endl;
+				cout << std::endl << "-= Coin Lands on TAILS! =-\n" << std::endl;
 				SetConsoleTextAttribute(h, 15);
-				cout << "Returning to selection" << endl << endl;
-				break;
-				main();
+				cout << "Returning to selection\n" << std::endl;
 			}
-		case 2:	// Runs this menu when input is equal to number 2
-			cout << "Exiting Program." << endl;
-			Sleep(1000);
-			exit(1);	// Closes program
 		}
-		return main();
-	}
- 
+		else if (choice == 'q') {	// If the choice is not q then it is invalid and return to the top of do
+			cout << "Invalid answer." << std::endl;
+		}
+	} while (choice != 'q'); // makes the do loop
+	exit(1); // Exits program
+	return 0;
 }
-
