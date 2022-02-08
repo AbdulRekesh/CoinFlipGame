@@ -8,7 +8,6 @@ int main() {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);	// Creates handle to used SetConsoleTextAttribute
 	SetConsoleTextAttribute(h, 15); // Sets console text to bright white
 	srand(time(NULL));
-	int iNumber = (rand() % 2) + 1;	// Randomizes iNumber between 1 and 2
 	char choice; // Initialize choice
 
 	do {	// Creates a loop
